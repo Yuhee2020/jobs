@@ -6,7 +6,6 @@ const cache = new InMemoryCache({
       fields: {
         getJobList: {
           keyArgs: false,
-          // eslint-disable-next-line default-param-last
           merge(existing = {}, incoming) {
             return {
               ...existing,
@@ -23,7 +22,7 @@ const cache = new InMemoryCache({
 })
 
 export const client = new ApolloClient({
-  uri: process.env.REACT_APP_BASE_URL,
+  uri: process.env.REACT_APP_BASE_URL || 'https://api.unihow.ru/api',
   cache,
 })
 
