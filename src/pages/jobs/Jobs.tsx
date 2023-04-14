@@ -1,40 +1,36 @@
-import React from 'react';
-import InfiniteScroll from "react-infinite-scroll-component";
-import {JobCard} from "../../components/jobCard/JobCard";
-import {useQuery} from "@apollo/client";
-import {GET_JOBS} from "../../apollo/jobs";
-import {JOBS_LOAD_LIMIT} from "../../constants";
-import {BackDrop} from "../../components/backdrop/BackDrop";
-import {JobType} from "../../types";
-import s from "./Jobs.module.scss"
-import {
-  Alert,
-  AlertTitle,
-  CircularProgress,
-  LinearProgress,
-  Skeleton
-} from "@mui/material";
+import React from 'react'
+
+import { useQuery } from '@apollo/client'
+import { LinearProgress } from '@mui/material'
+import InfiniteScroll from 'react-infinite-scroll-component'
+
+import { GET_JOBS } from '../../apollo/jobs'
+import { AppSpinner } from '../../components/appSpiner/AppSpinner'
+import { EndMessage } from '../../components/endMessage/EndMessage'
+import { ErrorAlert } from '../../components/errorAlert/ErrorAlert'
+import { JobCard } from '../../components/jobCard/JobCard'
+import { JOBS_LOAD_LIMIT } from '../../constants'
+import { JobType } from '../../types'
+
+import s from './Jobs.module.scss'
 
 export const Jobs = () => {
+  const { loading, error, data, fetchMore } = useQuery(GET_JOBS, {
+    variables: { skip: 0, limit: JOBS_LOAD_LIMIT },
+  })
 
-  const {loading, error, data, fetchMore} = useQuery(GET_JOBS, {
-    variables: {skip: 0, limit: JOBS_LOAD_LIMIT}
-  });
-
-  if(error) return  <Alert severity="error">
-    <AlertTitle>Error</AlertTitle>
-    This is an error alert — <strong>check it out!</strong>
-  </Alert>
-    if (loading) return <CircularProgress color="inherit" />;
+  if (loading) return <AppSpinner />
+  if (error) return <ErrorAlert />
 
   const jobs = data.getJobList.jobs as JobType[]
 
   const handleJobListScroll = async () => {
-    const hasNextPage = data.getJobList.meta.hasNextPage
-    hasNextPage && await fetchMore({
-      variables: {skip: jobs.length, limit: JOBS_LOAD_LIMIT}
-    })
+    const { hasNextPage } = data.getJobList.meta
 
+    hasNextPage &&
+      (await fetchMore({
+        variables: { skip: jobs.length, limit: JOBS_LOAD_LIMIT },
+      }))
   }
 
   return (
@@ -43,18 +39,14 @@ export const Jobs = () => {
       dataLength={jobs.length}
       next={handleJobListScroll}
       hasMore={jobs.length < data.getJobList.meta.totalItems}
-      loader={<LinearProgress  color="error"/>}
-      endMessage={
-        <p style={{textAlign: 'center'}}>
-          <b>Yay! You have seen it all</b>
-        </p>
-      }
+      loader={<LinearProgress color="error" />}
+      endMessage={<EndMessage />}
     >
-      {jobs.map(job =>
-        <JobCard key={job.id} job={job}/>
-      )}
+      {jobs.map(job => (
+        <JobCard key={job.id} job={job} />
+      ))}
     </InfiniteScroll>
-  );
-};
+  )
+}
 
-export default Jobs;
+export default Jobs

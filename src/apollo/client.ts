@@ -1,6 +1,6 @@
-import {ApolloClient, InMemoryCache} from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 
-const cache=new InMemoryCache({
+const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
@@ -8,21 +8,22 @@ const cache=new InMemoryCache({
           keyArgs: false,
           merge(existing = {}, incoming) {
             return {
-              ...existing, ...incoming, jobs: existing.jobs
+              ...existing,
+              ...incoming,
+              jobs: existing.jobs
                 ? [...existing.jobs, ...incoming.jobs]
-                : [...incoming.jobs]
+                : [...incoming.jobs],
             }
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 })
 
 export const client = new ApolloClient({
   uri: process.env.REACT_APP_BASE_URL,
-  cache
-});
+  cache,
+})
 
-
-export default client;
+export default client

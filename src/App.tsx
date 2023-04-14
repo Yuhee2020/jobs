@@ -1,18 +1,18 @@
-import React from 'react';
-import './App.scss';
-import Jobs from "./pages/jobs/Jobs";
-import {Container} from "@mui/material";
-import {AppHeader} from "./components/header/AppHeader";
+import React from 'react'
 
+import './App.scss'
+import { Container } from '@mui/material'
+
+import { AppHeader } from './components/header/AppHeader'
+import Jobs from './pages/jobs/Jobs'
 
 export const App = () => {
   return (
     <>
-      <AppHeader/>
+      <AppHeader />
       <Container>
-        <Jobs/>
-      </Container></>
-  );
+        <Jobs />
+      </Container>
+    </>
+  )
 }
-
-
