@@ -1,6 +1,6 @@
 # Jobs
 
-[see project]()
+
 
 ### Infinity scrolling of job cards
 
