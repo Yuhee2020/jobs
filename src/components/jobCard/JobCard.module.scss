@@ -1,0 +1,57 @@
+.jobCard {
+  padding: 20px;
+
+  .title {
+    display: flex;
+    gap: 10px;
+    align-items: start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .company{
+      text-transform: uppercase;
+    }
+    .clubButton{
+      background: rgb(255, 93, 93);
+      border-radius: 15px;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .dates {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .date {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      font-size: 0.75em;
+    }
+  }
+  .categories{
+    color: #8F8F8F;
+  }
+  .location{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .salary{
+    background: rgb(245, 255, 204);
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 0.875rem;
+    width: fit-content;
+    font-weight: bold;
+
+  }
+  .salaryBlur{
+    filter: blur(3px)
+  }
+}
+
+
+

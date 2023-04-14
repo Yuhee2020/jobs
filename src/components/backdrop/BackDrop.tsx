@@ -9,8 +9,8 @@ type PropsType = {
 
 export const BackDrop = ({ loading }: PropsType) => {
   return (
-    <Backdrop className="backdrop" open={loading}>
-      <CircularProgress color="inherit" />
+    <Backdrop  open={loading}>
+      <CircularProgress color="error" />
     </Backdrop>
   );
 };
