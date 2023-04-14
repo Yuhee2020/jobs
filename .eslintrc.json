@@ -67,7 +67,7 @@
     ],
     "import/extensions": "off",
     "import/prefer-default-export": "off",
-    "default-param-last": 0,
+//    "default-param-last": 0,
     "consistent-return": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "padding-line-between-statements": [

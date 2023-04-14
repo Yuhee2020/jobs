@@ -6,6 +6,7 @@ const cache = new InMemoryCache({
       fields: {
         getJobList: {
           keyArgs: false,
+          // eslint-disable-next-line default-param-last
           merge(existing = {}, incoming) {
             return {
               ...existing,
